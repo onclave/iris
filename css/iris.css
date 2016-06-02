@@ -159,8 +159,11 @@ td span {
 }
 
 .container {
-    width: 200px;
-    height: 600px;
+    padding-top: 80px;
+}
+
+.row {
+    text-align: center;
 }
 
 iframe {
@@ -180,6 +183,10 @@ iframe {
   border-left: 1px solid #CCCCCC;
 }
 
-.appbody {
-    padding-top: 80px;
+.footer {
+    bottom : 0;
+    width: 100%;
+    text-align: center;
+    color: #104E8B;
+    padding-top: 30px;
 }
