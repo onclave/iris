@@ -24,7 +24,6 @@ $(function() {
                 url: toggleSwitchOneOn,
                 data: null,
                 success: function(response) {
-                    console.log(response);
                     response = $.parseJSON(response);
                     
                     if(response.success) {
@@ -48,11 +47,9 @@ $(function() {
                 url: toggleSwitchOneOff,
                 data: null,
                 success: function(response) {
-                    console.log(response);
-                    //response = $.parseJSON(response);
+                    response = $.parseJSON(response);
                     
                     if(response.success) {
-                        response = $.parseJSON(response);
                         
                         if(response.success) {
                             swal("Success", "Switch One was successfully switched off!", "success");
