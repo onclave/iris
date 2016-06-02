@@ -24,6 +24,8 @@ $(function() {
                 url: toggleSwitchOneOn,
                 data: null,
                 success: function(response) {
+                    response = $.parseJSON(response);
+                    
                     if(response.success) {
                         swal("Success", response.message, "success");
                     }
@@ -46,6 +48,8 @@ $(function() {
                 data: null,
                 success: function(response) {
                     if(response.success) {
+                        response = $.parseJSON(response);
+                        
                         if(response.success) {
                             swal("Success", "Switch One was successfully switched off!", "success");
                         }
@@ -76,6 +80,8 @@ $(function() {
                 url: toggleSwitchTwoOn,
                 data: null,
                 success: function(response) {
+                    response = $.parseJSON(response);
+                    
                     if(response.success) {
                         swal("Success", "Switch Two was successfully switched on!", "success");
                     }
@@ -97,6 +103,8 @@ $(function() {
                 url: toggleSwitchTwoOff,
                 data: null,
                 success: function(response) {
+                    response = $.parseJSON(response);
+                    
                     if(response.success) {
                         if(response.success) {
                             swal("Success", "Switch Two was successfully switched off!", "success");
@@ -129,6 +137,8 @@ $(function() {
                 url: toggleSwitchThreeOn,
                 data: null,
                 success: function(response) {
+                    response = $.parseJSON(response);
+                    
                     if(response.success) {
                         swal("Success", "Switch Three was successfully switched on!", "success");
                     }
@@ -149,6 +159,8 @@ $(function() {
                 url: toggleSwitchThreeOff,
                 data: null,
                 success: function(response) {
+                    response = $.parseJSON(response);
+                    
                     if(response.success) {
                         if(response.success) {
                             swal("Success", "Switch Three was successfully switched off!", "success");
@@ -180,6 +192,8 @@ $(function() {
                 url: toggleSwitchFourOn,
                 data: null,
                 success: function(response) {
+                    response = $.parseJSON(response);
+                    
                     if(response.success) {
                         swal("Success", "Switch Four was successfully switched on!", "success");
                     }
@@ -201,6 +215,8 @@ $(function() {
                 url: toggleSwitchFourOff,
                 data: null,
                 success: function(response) {
+                    response = $.parseJSON(response);
+                    
                     if(response.success) {
                         if(response.success) {
                             swal("Success", "Switch Four was successfully switched off!", "success");
