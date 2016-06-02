@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<!--
+  -- @author: sajib
+  -->
+
+<html>
+    <head>
+        <title>WELCOME TO IRIS</title>
+        <link rel="stylesheet" href="../css/iris.css">
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+        <script src="../js/sweetalert.min.js"></script>
+        <link rel="stylesheet" href="../css/sweetalert.css">
+        <script src="../js/iris.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="">
+                    <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                        <a class="navbar-brand" href="#/"><b id="prcrftlogo" style="color: #fff;">Iris</b></a>
+                </div>
+                  
+            </div>
+        </nav>
+        <div class="appbody checkbox centerthis">
+            <label>
+                <table class="table-fill">
+                    <tbody>
+                    <tr>
+                        <td class="text-left"><span>Switch One :</span></td>
+                        <td class="text-right"><input data-toggle="toggle" type="checkbox" id="switch_one" /></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </label>
+        </div>
+        <div class="checkbox centerthis">
+            <label>
+                <table class="table-fill">
+                    <thread>
+                        <tbody class="table-hover">
+                            <tr>
+                                <td class="text-left"><span>Switch Two :</span></td>
+                                <td class="text-right"><input data-toggle="toggle" type="checkbox" id="switch_two" /></td>
+                            </tr>
+                        </tbody>
+                    </thread>
+                </table>
+            </label>
+        </div>
+        <div class="checkbox centerthis">
+            <label>
+                <table class="table-fill">
+                    <thread>
+                        <tbody class="table-hover">
+                            <tr>
+                                <td class="text-left"><span>Switch Three :</span></td>
+                                <td class="text-right"><input data-toggle="toggle" type="checkbox" id="switch_three" /></td>
+                            </tr>
+                        </tbody>
+                    </thread>
+                </table>
+            </label>
+        </div>
+        <div class="checkbox centerthis">
+            <label>
+                <table class="table-fill">
+                    <thread>
+                        <tbody class="table-hover">
+                            <tr>
+                                <td class="text-left"><span>Switch Four :</span></td>
+                                <td class="text-right"><input data-toggle="toggle" type="checkbox" id="switch_four" /></td>
+                            </tr>
+                        </tbody>
+                    </thread>
+                </table>
+            </label>
+        </div>
+        <div class="checkbox centerthis">
+            <label>
+                <table class="table-fill">
+                    <thread>
+                        <tbody class="table-hover">
+                            <tr>
+                                <td class="text-center" id="live_feed"><span>Live Feed</span></td>
+                                <td class="text-center">Stop Feed</td>
+                            </tr>
+                        </tbody>
+                    </thread>
+                </table>
+            </label>
+        </div>
+        <div id="sampleModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Live Stream</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="col-xs-12">
+                                <iframe src="http://localhost/cyllid" id="live_feed_frame" name="live_feed"></iframe><br/>
+                                <a class="buttonlink" href="http://localhost:8080" target="live_feed" id="live_feed_link">live feed</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="position: relative">
+            <p style="bottom: 0; width:100%; text-align: center; color: #104E8B;">
+                &copy; 2016 Academy Of Technology | Developed as a Final Year Project
+            </p>
+        </div>
+    </body>
+</html>
+
+                        
+                        
+                        
+
+                     
+                        
+				
+
