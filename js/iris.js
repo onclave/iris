@@ -131,7 +131,6 @@ $(function() {
     })
     
     $("#switch_three").change(function() {
-        alert($(this).prop('checked'));
         if($(this).prop('checked')) {
             $.ajax({
                type: 'GET',
