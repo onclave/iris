@@ -24,6 +24,7 @@ $(function() {
                 url: toggleSwitchOneOn,
                 data: null,
                 success: function(response) {
+                    console.log(response);
                     response = $.parseJSON(response);
                     
                     if(response.success) {
@@ -47,7 +48,8 @@ $(function() {
                 url: toggleSwitchOneOff,
                 data: null,
                 success: function(response) {
-                    response = $.parseJSON(response);
+                    console.log(response);
+                    //response = $.parseJSON(response);
                     
                     if(response.success) {
                         response = $.parseJSON(response);
