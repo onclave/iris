@@ -4,7 +4,7 @@
 
 $(function() {
     var toggleSwitchOneOn = "http://localhost/iris/php/switchOneOn.php";
-    var toggleSwitchTwoOn = "";
+    var toggleSwitchTwoOn = "http://localhost/iris/php/switchTwoOn.php";
     var toggleSwitchThreeOn = "";
     var toggleSwitchFourOn = "";
     var toggleSwitchOneOff = "";
