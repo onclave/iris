@@ -5,12 +5,12 @@
 $(function() {
     var toggleSwitchOneOn = "http://localhost/iris/php/switchOneOn.php";
     var toggleSwitchTwoOn = "http://localhost/iris/php/switchTwoOn.php";
-    var toggleSwitchThreeOn = "";
-    var toggleSwitchFourOn = "";
-    var toggleSwitchOneOff = "";
-    var toggleSwitchTwoOff = "";
-    var toggleSwitchThreeOff = "";
-    var toggleSwitchFourOff = "";
+    var toggleSwitchThreeOn = "http://localhost/iris/php/switchThreeOn.php";
+    var toggleSwitchFourOn = "http://localhost/iris/php/switchFourOn.php";
+    var toggleSwitchOneOff = "http://localhost/iris/php/switchOneOff.php";
+    var toggleSwitchTwoOff = "http://localhost/iris/php/switchTwoOff.php";
+    var toggleSwitchThreeOff = "http://localhost/iris/php/switchThreeOff.php";
+    var toggleSwitchFourOff = "http://localhost/iris/php/switchFourOff.php";
     
     $('#switch_one').bootstrapToggle();
     $('#switch_two').bootstrapToggle();
