@@ -1,4 +1,4 @@
 <?php
-    $response = array('success' => false, 'message' => 'Switch Four was successfully switched off!');
+    $response = array('success' => true, 'message' => 'Switch Four was successfully switched off!');
     echo json_encode($response);
 ?>

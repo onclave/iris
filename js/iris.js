@@ -47,6 +47,8 @@ $(function() {
                 url: toggleSwitchOneOff,
                 data: null,
                 success: function(response) {
+                    response = $.parseJSON(response);
+                    
                     if(response.success) {
                         response = $.parseJSON(response);
                         
