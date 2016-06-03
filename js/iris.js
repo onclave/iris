@@ -17,13 +17,18 @@ $(function() {
     $('#switch_three').bootstrapToggle();
     $('#switch_four').bootstrapToggle();
     
+    $("#block").hide();
+    
     $("#switch_one").change(function() {
+        startLoading();
+        
         if($(this).prop('checked')) {
             $.ajax({
                type: 'GET',
                 url: toggleSwitchOneOn,
                 data: null,
                 success: function(response) {
+                    endLoading();
                     response = $.parseJSON(response);
                     
                     if(response.success) {
@@ -36,6 +41,7 @@ $(function() {
                     }
                 },
                 error: function(status, errorThrown) {
+                    endLoading();
                     swal("Error", "The request could not be completed.", "error");
                     $("#switch_one").removeAttr('checked');
                 }
@@ -47,6 +53,7 @@ $(function() {
                 url: toggleSwitchOneOff,
                 data: null,
                 success: function(response) {
+                    endLoading();
                     response = $.parseJSON(response);
                     
                     if(response.success) {
@@ -67,6 +74,7 @@ $(function() {
                     }
                 },
                 error: function(status, errorThrown) {
+                    endLoading();
                     swal("Error", "There was a problem connecting to the server.", "error");
                     $("#switch_one").prop('checked', true);
                 }
@@ -245,3 +253,13 @@ $(function() {
         $("#sampleModal").modal('show');
     })
 })
+
+function startLoading() {
+    $("#app-body").fadeOut();
+    $("#block").fadeIn();
+}
+
+function endLoading() {
+    $("#block").fadeOut();
+    $("#app-body").fadeIn();
+}
