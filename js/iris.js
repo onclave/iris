@@ -52,7 +52,7 @@ $(function() {
                     if(response.success) {
                         
                         if(response.success) {
-                            swal("Success", "Switch One was successfully switched off!", "success");
+                            swal("Success", response.message, "success");
                         }
                         else {
                             //response was a failure
@@ -84,7 +84,7 @@ $(function() {
                     response = $.parseJSON(response);
                     
                     if(response.success) {
-                        swal("Success", "Switch Two was successfully switched on!", "success");
+                        swal("Success", response.message, "success");
                     }
                     else {
                         //response was a failure
@@ -108,7 +108,7 @@ $(function() {
                     
                     if(response.success) {
                         if(response.success) {
-                            swal("Success", "Switch Two was successfully switched off!", "success");
+                            swal("Success", response.message, "success");
                         }
                         else {
                             //response was a failure
@@ -140,7 +140,7 @@ $(function() {
                     response = $.parseJSON(response);
                     
                     if(response.success) {
-                        swal("Success", "Switch Three was successfully switched on!", "success");
+                        swal("Success", response.message, "success");
                     }
                     else {
                         swal("Error", "There was a problem with switch three.", "error");
@@ -163,7 +163,7 @@ $(function() {
                     
                     if(response.success) {
                         if(response.success) {
-                            swal("Success", "Switch Three was successfully switched off!", "success");
+                            swal("Success", response.message, "success");
                         }
                         else {
                             //response was a failure
@@ -195,7 +195,7 @@ $(function() {
                     response = $.parseJSON(response);
                     
                     if(response.success) {
-                        swal("Success", "Switch Four was successfully switched on!", "success");
+                        swal("Success", response.message, "success");
                     }
                     else {
                         //response was a failure
