@@ -83,12 +83,15 @@ $(function() {
     })
     
     $("#switch_two").change(function() {
+        startLoading();
+        
         if($(this).prop('checked')) {
             $.ajax({
                type: 'GET',
                 url: toggleSwitchTwoOn,
                 data: null,
                 success: function(response) {
+                    endLoading();
                     response = $.parseJSON(response);
                     
                     if(response.success) {
@@ -101,6 +104,7 @@ $(function() {
                     }
                 },
                 error: function(status, errorThrown) {
+                    endLoading();
                     swal("Error", "The request could not be completed.", "error");
                     $("#switch_two").removeAttr('checked');
                 }
@@ -112,6 +116,7 @@ $(function() {
                 url: toggleSwitchTwoOff,
                 data: null,
                 success: function(response) {
+                    endLoading();
                     response = $.parseJSON(response);
                     
                     if(response.success) {
@@ -131,6 +136,7 @@ $(function() {
                     }
                 },
                 error: function(status, errorThrown) {
+                    endLoading();
                     swal("Error", "There was a problem connecting to the server.", "error");
                     $("#switch_two").prop('checked', true);
                 }
@@ -139,12 +145,15 @@ $(function() {
     })
     
     $("#switch_three").change(function() {
+        startLoading();
+        
         if($(this).prop('checked')) {
             $.ajax({
                type: 'GET',
                 url: toggleSwitchThreeOn,
                 data: null,
                 success: function(response) {
+                    endLoading();
                     response = $.parseJSON(response);
                     
                     if(response.success) {
@@ -156,6 +165,7 @@ $(function() {
                     }
                 },
                 error: function(status, errorThrown) {
+                    endLoading();
                     swal("Error", "The request could not be completed.", "error");
                     $("#switch_three").removeAttr('checked');
                 }
@@ -167,6 +177,7 @@ $(function() {
                 url: toggleSwitchThreeOff,
                 data: null,
                 success: function(response) {
+                    endLoading();
                     response = $.parseJSON(response);
                     
                     if(response.success) {
@@ -186,6 +197,7 @@ $(function() {
                     }
                 },
                 error: function(status, errorThrown) {
+                    endLoading();
                     swal("Error", "There was a problem connecting to the server.", "error");
                     $("#switch_three").prop('checked', true);
                 }
@@ -194,12 +206,15 @@ $(function() {
     })
     
     $("#switch_four").change(function() {
+        startLoading();
+        
         if($(this).prop('checked')) {
             $.ajax({
                type: 'GET',
                 url: toggleSwitchFourOn,
                 data: null,
                 success: function(response) {
+                    endLoading();
                     response = $.parseJSON(response);
                     
                     if(response.success) {
@@ -212,6 +227,7 @@ $(function() {
                     }
                 },
                 error: function(status, errorThrown) {
+                    endLoading();
                     swal("Error", "The request could not be completed.", "error");
                     $("#switch_four").removeAttr('checked');
                 }
@@ -223,6 +239,7 @@ $(function() {
                 url: toggleSwitchFourOff,
                 data: null,
                 success: function(response) {
+                    endLoading();
                     response = $.parseJSON(response);
                     
                     if(response.success) {
@@ -242,6 +259,7 @@ $(function() {
                     }
                 },
                 error: function(status, errorThrown) {
+                    endLoading();
                     swal("Error", "There was a problem connecting to the server.", "error");
                     $("#switch_four").prop('checked', true);
                 }
@@ -256,10 +274,10 @@ $(function() {
 
 function startLoading() {
     $("#app-body").fadeOut();
-    $("#block").fadeIn();
+    $("#block").slideDown();
 }
 
 function endLoading() {
-    $("#block").fadeOut();
+    $("#block").slideUp();
     $("#app-body").fadeIn();
 }
