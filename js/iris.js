@@ -274,10 +274,10 @@ $(function() {
 
 function startLoading() {
     $("#app-body").fadeOut();
-    $("#block").slideDown();
+    $("#block").slideUp();
 }
 
 function endLoading() {
-    $("#block").slideUp();
+    $("#block").slideDown();
     $("#app-body").fadeIn();
 }
