@@ -11,6 +11,7 @@ $(function() {
     var toggleSwitchTwoOff = "http://localhost/iris/php/switchTwoOff.php";
     var toggleSwitchThreeOff = "http://localhost/iris/php/switchThreeOff.php";
     var toggleSwitchFourOff = "http://localhost/iris/php/switchFourOff.php";
+    var sync = "http://localhost/iris/php/synchronize.php";
     
     $('#switch_one').bootstrapToggle();
     $('#switch_two').bootstrapToggle();
@@ -270,6 +271,54 @@ $(function() {
     $("#live_feed").click(function() {
         $("#sampleModal").modal('show');
     })
+    
+    (function synchronize() {
+        $.ajax({
+            type: 'GET',
+            url: sync,
+            data: null,
+            success: function(response) {
+                response = $.parseJSON(response);
+                console.log(response);
+                
+                if(response.success) {
+                    if(response.message.one) {
+                        $("#switch_one").prop('checked', true);
+                    }
+                    else if(!response.message.one) {
+                        $("#switch_one").removeAttr('checked');
+                    }
+                    
+                    if(response.message.two) {
+                        $("#switch_two").prop('checked', true);
+                    }
+                    else if(!response.message.two) {
+                        $("#switch_two").removeAttr('checked');
+                    }
+                    
+                    if(response.message.three) {
+                        $("#switch_three").prop('checked', true);
+                    }
+                    else if(!response.message.three) {
+                        $("#switch_three").removeAttr('checked');
+                    }
+                    
+                    if(response.message.four) {
+                        $("#switch_four").prop('checked', true);
+                    }
+                    else if(!response.message.four) {
+                        $("#switch_four").removeAttr('checked');
+                    }
+                }
+                else {
+                    swal("Error", response.message, "error");
+                }
+            },
+            complete:function() {
+                setTimeout(synchronize, 1000);
+            }
+        });
+    })();
 })
 
 function startLoading() {
