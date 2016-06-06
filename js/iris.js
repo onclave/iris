@@ -81,7 +81,7 @@ $(function() {
                 }
             });
         }
-    })
+    });
     
     $("#switch_two").change(function() {
         startLoading();
@@ -143,7 +143,7 @@ $(function() {
                 }
             });
         }
-    })
+    });
     
     $("#switch_three").change(function() {
         startLoading();
@@ -204,7 +204,7 @@ $(function() {
                 }
             });
         }
-    })
+    });
     
     $("#switch_four").change(function() {
         startLoading();
@@ -266,11 +266,11 @@ $(function() {
                 }
             });
         }
-    })
+    });
     
     $("#live_feed").click(function() {
         $("#sampleModal").modal('show');
-    })
+    });
     
     (function synchronize() {
         $.ajax({
