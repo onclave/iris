@@ -53,8 +53,8 @@
                     
                     if($stmt->rowCount() > 0) {
                         (strcmp($response['message'], $error) == 0) ?
-                            ($response['message'] = $message_bit_01 + $one + $message_bit_02 + $on) :
-                                ($response['message'] = $response['message'] + " " + $message_bit_01 + $one + $message_bit_02 + $on);
+                            ($response['message'] = $message_bit_01 . $one . $message_bit_02 . $on) :
+                                ($response['message'] = $response['message'] . " " . $message_bit_01 . $one . $message_bit_02 . $on);
                     } else {
                         $response['message'] = $error_sync;
                         
@@ -86,8 +86,8 @@
                     
                     if($stmt->rowCount() > 0) {
                         (strcmp($response['message'], $error) == 0) ?
-                            ($response['message'] = $message_bit_01 + $one + $message_bit_02 + $off) :
-                                ($response['message'] = $response['message'] + " " + $message_bit_01 + $one + $message_bit_02 + $off);
+                            ($response['message'] = $message_bit_01 . $one . $message_bit_02 . $off) :
+                                ($response['message'] = $response['message'] . " " . $message_bit_01 . $one . $message_bit_02 . $off);
                     } else {
                         $response['message'] = $error_sync;
                         
@@ -123,8 +123,8 @@
                     
                     if($stmt->rowCount() > 0) {
                         (strcmp($response['message'], $error) == 0) ?
-                            ($response['message'] = $message_bit_01 + $two + $message_bit_02 + $on) :
-                                ($response['message'] = $response['message'] + " " + $message_bit_01 + $two + $message_bit_02 + $on);
+                            ($response['message'] = $message_bit_01 . $two . $message_bit_02 . $on) :
+                                ($response['message'] = $response['message'] . " " . $message_bit_01 . $two . $message_bit_02 . $on);
                     } else {
                         $response['message'] = $error_sync;
                         
@@ -156,8 +156,8 @@
                     
                     if($stmt->rowCount() > 0) {
                         (strcmp($response['message'], $error) == 0) ?
-                            ($response['message'] = $message_bit_01 + $two + $message_bit_02 + $off) :
-                                ($response['message'] = $response['message'] + " " + $message_bit_01 + $two + $message_bit_02 + $off);
+                            ($response['message'] = $message_bit_01 . $two . $message_bit_02 . $off) :
+                                ($response['message'] = $response['message'] . " " . $message_bit_01 . $two . $message_bit_02 . $off);
                     } else {
                         $response['message'] = $error_sync;
                         
@@ -193,8 +193,8 @@
                     
                     if($stmt->rowCount() > 0) {
                         (strcmp($response['message'], $error) == 0) ?
-                            ($response['message'] = $message_bit_01 + $three + $message_bit_02 + $on) :
-                                ($response['message'] = $response['message'] + " " + $message_bit_01 + $three + $message_bit_02 + $on);
+                            ($response['message'] = $message_bit_01 . $three . $message_bit_02 . $on) :
+                                ($response['message'] = $response['message'] . " " . $message_bit_01 . $three . $message_bit_02 . $on);
                     } else {
                         $response['message'] = $error_sync;
                         
@@ -226,8 +226,8 @@
                     
                     if($stmt->rowCount() > 0) {
                         (strcmp($response['message'], $error) == 0) ?
-                            ($response['message'] = $message_bit_01 + $three + $message_bit_02 + $off) :
-                                ($response['message'] = $response['message'] + " " + $message_bit_01 + $three + $message_bit_02 + $off);
+                            ($response['message'] = $message_bit_01 . $three . $message_bit_02 . $off) :
+                                ($response['message'] = $response['message'] . " " . $message_bit_01 . $three . $message_bit_02 . $off);
                     } else {
                         $response['message'] = $error_sync;
                         
@@ -263,8 +263,8 @@
                     
                     if($stmt->rowCount() > 0) {
                         (strcmp($response['message'], $error) == 0) ?
-                            ($response['message'] = $message_bit_01 + $four + $message_bit_02 + $on) :
-                                ($response['message'] = $response['message'] + " " + $message_bit_01 + $four + $message_bit_02 + $on);
+                            ($response['message'] = $message_bit_01 . $four . $message_bit_02 . $on) :
+                                ($response['message'] = $response['message'] . " " . $message_bit_01 . $four . $message_bit_02 . $on);
                     } else {
                         $response['message'] = $error_sync;
                         
@@ -296,8 +296,8 @@
                     
                     if($stmt->rowCount() > 0) {
                         (strcmp($response['message'], $error) == 0) ?
-                            ($response['message'] = $message_bit_01 + $four + $message_bit_02 + $off) :
-                                ($response['message'] = $response['message'] + " " + $message_bit_01 + $four + $message_bit_02 + $off);
+                            ($response['message'] = $message_bit_01 . $four . $message_bit_02 . $off) :
+                                ($response['message'] = $response['message'] . " " . $message_bit_01 . $four . $message_bit_02 . $off);
                     } else {
                         $response['message'] = $error_sync;
                         
