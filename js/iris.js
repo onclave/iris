@@ -13,10 +13,10 @@ $(function() {
     var toggleSwitchFourOff = "http://localhost/iris/php/switchFourOff.php";
     var sync = "http://localhost/iris/php/synchronize.php";
     
-    $('#switch_one').bootstrapToggle();
-    $('#switch_two').bootstrapToggle();
-    $('#switch_three').bootstrapToggle();
-    $('#switch_four').bootstrapToggle();
+    //$('#switch_one').bootstrapToggle();
+    //$('#switch_two').bootstrapToggle();
+    //$('#switch_three').bootstrapToggle();
+    //$('#switch_four').bootstrapToggle();
     
     $("#block").hide();
     
