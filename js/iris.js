@@ -286,28 +286,32 @@ $(function() {
                     if(response.message.one == 1) {
                         $("#switch_one").prop('checked', true);
                     }
-                    else if(response.message.one == 0) {
+                    
+                    if(response.message.one == 0) {
                         $("#switch_one").removeAttr('checked');
                     }
                     
                     if(response.message.two == 1) {
                         $("#switch_two").prop('checked', true);
                     }
-                    else if(response.message.two == 0) {
+                    
+                    if(response.message.two == 0) {
                         $("#switch_two").removeAttr('checked');
                     }
                     
                     if(response.message.three) {
                         $("#switch_three").prop('checked', true);
                     }
-                    else if(!response.message.three) {
+                    
+                    if(!response.message.three) {
                         $("#switch_three").removeAttr('checked');
                     }
                     
                     if(response.message.four) {
                         $("#switch_four").prop('checked', true);
                     }
-                    else if(!response.message.four) {
+                    
+                    if(!response.message.four) {
                         $("#switch_four").removeAttr('checked');
                     }
                 }
