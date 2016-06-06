@@ -278,6 +278,7 @@ $(function() {
             url: sync,
             data: null,
             success: function(response) {
+                console.log(response);
                 response = $.parseJSON(response);
                 console.log(response);
                 
