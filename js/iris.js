@@ -283,17 +283,17 @@ $(function() {
                 console.log(response);
                 
                 if(response.success) {
-                    if(response.message.one) {
+                    if(response.message.one == 1) {
                         $("#switch_one").prop('checked', true);
                     }
-                    else if(!response.message.one) {
+                    else if(response.message.one == 0) {
                         $("#switch_one").removeAttr('checked');
                     }
                     
-                    if(response.message.two) {
+                    if(response.message.two == 1) {
                         $("#switch_two").prop('checked', true);
                     }
-                    else if(!response.message.two) {
+                    else if(response.message.two == 0) {
                         $("#switch_two").removeAttr('checked');
                     }
                     
