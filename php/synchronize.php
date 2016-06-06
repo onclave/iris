@@ -2,7 +2,7 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 
-    session_start();
+    //session_start();
 
     require 'db.connect.php';
     require 'STATEMENTS.php';
@@ -20,12 +20,14 @@
             $switches['four'] = $row['switchfour'];
         }
 
+        $response['success'] = true;
         $response['message'] = $switches;
         
-        return json_encode($response);
+        echo json_encode($response);
     } catch(PDOException $e) {
+        $response['success'] = false;
         $response['message'] = "The database faced an exception!";
         
-        return json_encode($response);
+        echo json_encode($response);
     }
 ?>

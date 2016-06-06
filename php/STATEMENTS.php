@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    //session_start();
 
     $SYNCHRONIZE = "SELECT * FROM synchronize";
     $SWITCH_ONE_ON = "UPDATE synchronize SET switchone=true WHERE idsynchronize=1";
