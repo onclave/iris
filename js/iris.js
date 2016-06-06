@@ -292,7 +292,7 @@ $(function() {
                     }
                     
                     if(response.message.two == 1) {
-                        $("#switch_two").prop('checked', true);
+                        $("#switch_two").attr('checked', true);
                     }
                     
                     if(response.message.two == 0) {
