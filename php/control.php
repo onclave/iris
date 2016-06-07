@@ -7,7 +7,7 @@
     $switch_one = "switch_one";
     $switch_two = "switch_two";
     $switch_three = "switch_three";
-    $switch-four = "switch_four";
+    $switch_four = "switch_four";
 
     $on = "ON";
     $off = "OFF";
