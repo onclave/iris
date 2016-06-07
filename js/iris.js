@@ -290,6 +290,7 @@ $(function() {
     
     $('#saveSettings').click(function() {
         saveSettings();
+        swal("Success", "Settings was successfully saved!", "success");
     });
     
     (function synchronize() {
