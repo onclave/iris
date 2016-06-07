@@ -13,8 +13,8 @@ $(function() {
     var toggleSwitchFourOff = "http://localhost/iris/php/switchFourOff.php";
     var sync = "http://localhost/iris/php/synchronize.php";
     
-    //$('#switch_one').bootstrapToggle();
-    //$('#switch_two').bootstrapToggle();
+    $('#switch_one').bootstrapToggle();
+    $('#switch_two').bootstrapToggle();
     //$('#switch_three').bootstrapToggle();
     //$('#switch_four').bootstrapToggle();
     
@@ -284,19 +284,21 @@ $(function() {
                 
                 if(response.success) {
                     if(response.message.one == 1) {
-                        $("#switch_one").prop('checked', true);
+//                        $("#switch_one").prop('checked', true);
+                        $('#switch_one').bootstrapToggle('on');
                     }
                     
                     if(response.message.one == 0) {
-                        $("#switch_one").removeAttr('checked');
+//                        $("#switch_one").removeAttr('checked');
+                        $('#switch_one').bootstrapToggle('off');
                     }
                     
                     if(response.message.two == 1) {
-                        $("#switch_two").attr('checked', true);
+                        $('#switch_two').bootstrapToggle('on');
                     }
                     
                     if(response.message.two == 0) {
-                        $("#switch_two").removeAttr('checked');
+                        $('#switch_two').bootstrapToggle('off');
                     }
                     
                     if(response.message.three) {
