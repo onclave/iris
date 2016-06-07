@@ -3,14 +3,15 @@
 // ************/
 
 $(function() {
-    var toggleSwitchOneOn = "http://localhost/iris/php/switchOneOn.php";
-    var toggleSwitchTwoOn = "http://localhost/iris/php/switchTwoOn.php";
-    var toggleSwitchThreeOn = "http://localhost/iris/php/switchThreeOn.php";
-    var toggleSwitchFourOn = "http://localhost/iris/php/switchFourOn.php";
-    var toggleSwitchOneOff = "http://localhost/iris/php/switchOneOff.php";
-    var toggleSwitchTwoOff = "http://localhost/iris/php/switchTwoOff.php";
-    var toggleSwitchThreeOff = "http://localhost/iris/php/switchThreeOff.php";
-    var toggleSwitchFourOff = "http://localhost/iris/php/switchFourOff.php";
+    var control = "http://localhost/iris/php/control.php";
+    var toggleSwitchOneOn = control + "?switch_one=ON";
+    var toggleSwitchTwoOn = control + "?switch_two=ON";
+    var toggleSwitchThreeOn = control + "?switch_three=ON";
+    var toggleSwitchFourOn = control + "?switch_four=ON";
+    var toggleSwitchOneOff = control + "?switch_one=OFF";
+    var toggleSwitchTwoOff = control + "?switch_two=OFF";
+    var toggleSwitchThreeOff = control + "?switch_three=OFF";
+    var toggleSwitchFourOff = control + "?switch_four=OFF";
     var sync = "http://localhost/iris/php/synchronize.php";
     
     var switch_one = $('#switch_one').is(':checked');
@@ -25,6 +26,11 @@ $(function() {
     $('#switch_two').bootstrapToggle();
     $('#switch_three').bootstrapToggle();
     $('#switch_four').bootstrapToggle();
+    
+    $('#switch_one').bootstrapToggle('off');
+    $('#switch_two').bootstrapToggle('off');
+    $('#switch_three').bootstrapToggle('off');
+    $('#switch_four').bootstrapToggle('off');
     
     $("#block").hide();
     
@@ -44,6 +50,7 @@ $(function() {
             console.log("a change has occured");
             if(manual) {
                 console.log("a manual event was fired");
+                lock = true;
                 //--fire AJAX--
                 $.ajax({
                     type: 'GET',
@@ -57,11 +64,13 @@ $(function() {
                             swal("Success", response.message, "success");
                             switch_one = local;
                             manual = true;
+                            lock = false;
                         } else {
                             swal("Error", "There was a problem with switch one.", "error");
                             (local) ? ($('#switch_one').removeAttr('checked')) : ($('#switch_one').prop('checked', true));
                             switch_one = $('#switch_one').is(':checked');
                             manual = true;
+                            lock = false;
                         }
                     },
                     error(status, errorThrown) {
@@ -70,6 +79,7 @@ $(function() {
                         (local) ? ($('#switch_one').removeAttr('checked')) : ($('#switch_one').prop('checked', true));
                         switch_one = $('#switch_one').is(':checked');
                         manual = true;
+                        lock = false;
                     }
                 });
             } else {
@@ -80,262 +90,171 @@ $(function() {
         }
     });
     
-//    $("#switch_one").click(function() {
-//        startLoading();
-//        
-//        if($(this).prop('checked')) {
-//            $.ajax({
-//               type: 'GET',
-//                url: toggleSwitchOneOn,
-//                data: null,
-//                success: function(response) {
-//                    endLoading();
-//                    response = $.parseJSON(response);
-//                    
-//                    if(response.success) {
-//                        swal("Success", response.message, "success");
-//                    }
-//                    else {
-//                        //response was a failure
-//                        swal("Error", "There was a problem with switch one.", "error");
-//                        $("#switch_one").removeAttr('checked');
-//                    }
-//                },
-//                error: function(status, errorThrown) {
-//                    endLoading();
-//                    swal("Error", "The request could not be completed.", "error");
-//                    $("#switch_one").removeAttr('checked');
-//                }
-//            });
-//        }
-//        else {
-//            $.ajax({
-//               type: 'GET',
-//                url: toggleSwitchOneOff,
-//                data: null,
-//                success: function(response) {
-//                    endLoading();
-//                    response = $.parseJSON(response);
-//                    
-//                    if(response.success) {
-//                        
-//                        if(response.success) {
-//                            swal("Success", response.message, "success");
-//                        }
-//                        else {
-//                            //response was a failure
-//                            swal("Error", "There was a problem with switch one.", "error");
-//                            $("#switch_one").prop('checked', true);
-//                        }
-//                    }
-//                    else {
-//                        //response was a failure
-//                        swal("Error", "The request could not be completed.", "error");
-//                        $("#switch_one").prop('checked', true);
-//                    }
-//                },
-//                error: function(status, errorThrown) {
-//                    endLoading();
-//                    swal("Error", "There was a problem connecting to the server.", "error");
-//                    $("#switch_one").prop('checked', true);
-//                }
-//            });
-//        }
-//    });
-    
-    $("#switch_two").click(function() {
-        startLoading();
+    $('#switch_two').change(function() {
+        console.log("enters into a change event");
+        var local = $('#switch_two').is(':checked');
+        var url = (local) ? (toggleSwitchTwoOn) : (toggleSwitchTwoOff);
         
-        if($(this).prop('checked')) {
-            $.ajax({
-               type: 'GET',
-                url: toggleSwitchTwoOn,
-                data: null,
-                success: function(response) {
-                    endLoading();
-                    response = $.parseJSON(response);
-                    
-                    if(response.success) {
-                        swal("Success", response.message, "success");
-                    }
-                    else {
-                        //response was a failure
-                        swal("Error", "There was a problem with switch two.", "error");
-                        $("#switch_two").removeAttr('checked');
-                    }
-                },
-                error: function(status, errorThrown) {
-                    endLoading();
-                    swal("Error", "The request could not be completed.", "error");
-                    $("#switch_two").removeAttr('checked');
-                }
-            });
+        console.log("local : " + local);
+        console.log("url : " + url);
+        
+        if(manual) {
+            startLoading();
         }
-        else {
-            $.ajax({
-               type: 'GET',
-                url: toggleSwitchTwoOff,
-                data: null,
-                success: function(response) {
-                    endLoading();
-                    response = $.parseJSON(response);
-                    
-                    if(response.success) {
+        
+        if(local != switch_two) {
+            console.log("a change has occured");
+            if(manual) {
+                console.log("a manual event was fired");
+                lock = true;
+                //--fire AJAX--
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: null,
+                    success: function(response) {
+                        endLoading();
+                        response = $.parseJSON(response);
+                        
                         if(response.success) {
                             swal("Success", response.message, "success");
-                        }
-                        else {
-                            //response was a failure
-                            swal("Error", "There was a problem with switch two.", "error");
-                            $("#switch_two").prop('checked', true);
-                        }
-                    }
-                    else {
-                        //response was a failure
-                        swal("Error", "The request could not be completed.", "error");
-                        $("#switch_two").prop('checked', true);
-                    }
-                },
-                error: function(status, errorThrown) {
-                    endLoading();
-                    swal("Error", "There was a problem connecting to the server.", "error");
-                    $("#switch_two").prop('checked', true);
-                }
-            });
-        }
-    });
-    
-    $("#switch_three").change(function() {
-        if($(this).is(':checked')) {
-            alert("checked");
-            switch_three = $('#switch_three').is(':checked');
-            alert("global : " + switch_three);
-        } else {
-            alert('unchecked');
-            switch_three = $('#switch_three').is(':checked');
-            alert("global : " + switch_three);
-        }
-//        startLoading();
-//        
-//        alert($(this).prop('checked'));
-//        
-//        if($(this).prop('checked')) {
-//            $.ajax({
-//               type: 'GET',
-//                url: toggleSwitchThreeOn,
-//                data: null,
-//                success: function(response) {
-//                    endLoading();
-//                    response = $.parseJSON(response);
-//                    
-//                    if(response.success) {
-//                        swal("Success", response.message, "success");
-//                    }
-//                    else {
-//                        swal("Error", "There was a problem with switch three.", "error");
-//                        $("#switch_three").removeAttr('checked');
-//                    }
-//                },
-//                error: function(status, errorThrown) {
-//                    endLoading();
-//                    swal("Error", "The request could not be completed.", "error");
-//                    $("#switch_three").removeAttr('checked');
-//                }
-//            });
-//        }
-//        else {
-//            $.ajax({
-//               type: 'GET',
-//                url: toggleSwitchThreeOff,
-//                data: null,
-//                success: function(response) {
-//                    endLoading();
-//                    response = $.parseJSON(response);
-//                    
-//                    if(response.success) {
-//                        if(response.success) {
-//                            swal("Success", response.message, "success");
-//                        }
-//                        else {
-//                            //response was a failure
-//                            swal("Error", "There was a problem with switch three.", "error");
-//                            $("#switch_three").prop('checked', true);
-//                        }
-//                    }
-//                    else {
-//                        //response was a failure
-//                        swal("Error", "The request could not be completed.", "error");
-//                        $("#switch_three").prop('checked', true);
-//                    }
-//                },
-//                error: function(status, errorThrown) {
-//                    endLoading();
-//                    swal("Error", "There was a problem connecting to the server.", "error");
-//                    $("#switch_three").prop('checked', true);
-//                }
-//            });
-//        }
-    });
-    
-    $("#switch_four").change(function() {
-        startLoading();
-        
-        if($(this).prop('checked')) {
-            $.ajax({
-               type: 'GET',
-                url: toggleSwitchFourOn,
-                data: null,
-                success: function(response) {
-                    endLoading();
-                    response = $.parseJSON(response);
-                    
-                    if(response.success) {
-                        swal("Success", response.message, "success");
-                    }
-                    else {
-                        //response was a failure
-                        swal("Error", "There was a problem with switch four.", "error");
-                        $("#switch_four").removeAttr('checked');
-                    }
-                },
-                error: function(status, errorThrown) {
-                    endLoading();
-                    swal("Error", "The request could not be completed.", "error");
-                    $("#switch_four").removeAttr('checked');
-                }
-            });
-        }
-        else {
-            $.ajax({
-               type: 'GET',
-                url: toggleSwitchFourOff,
-                data: null,
-                success: function(response) {
-                    endLoading();
-                    response = $.parseJSON(response);
-                    
-                    if(response.success) {
-                        if(response.success) {
-                            swal("Success", "Switch Four was successfully switched off!", "success");
-                        }
-                        else {
-                            //response was a failure
+                            switch_two = local;
+                            manual = true;
+                            lock = false;
+                        } else {
                             swal("Error", "There was a problem with switch one.", "error");
-                            $("#switch_four").prop('checked', true);
+                            (local) ? ($('#switch_two').removeAttr('checked')) : ($('#switch_two').prop('checked', true));
+                            switch_two = $('#switch_two').is(':checked');
+                            manual = true;
+                            lock = false;
                         }
-                    }
-                    else {
-                        //response was a failure
+                    },
+                    error(status, errorThrown) {
+                        endLoading();
                         swal("Error", "The request could not be completed.", "error");
-                        $("#switch_four").prop('checked', true);
+                        (local) ? ($('#switch_two').removeAttr('checked')) : ($('#switch_two').prop('checked', true));
+                        switch_two = $('#switch_two').is(':checked');
+                        manual = true;
+                        lock = false;
                     }
-                },
-                error: function(status, errorThrown) {
-                    endLoading();
-                    swal("Error", "There was a problem connecting to the server.", "error");
-                    $("#switch_four").prop('checked', true);
-                }
-            });
+                });
+            } else {
+                console.log("a sync event was fired");
+                manual = true;
+                switch_two = $('#switch_two').is(':checked');
+            }
+        }
+    });
+    
+    $('#switch_three').change(function() {
+        console.log("enters into a change event");
+        var local = $('#switch_three').is(':checked');
+        var url = (local) ? (toggleSwitchThreeOn) : (toggleSwitchThreeOff);
+        
+        console.log("local : " + local);
+        console.log("url : " + url);
+        
+        if(manual) {
+            startLoading();
+        }
+        
+        if(local != switch_three) {
+            console.log("a change has occured");
+            if(manual) {
+                console.log("a manual event was fired");
+                lock = true;
+                //--fire AJAX--
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: null,
+                    success: function(response) {
+                        endLoading();
+                        response = $.parseJSON(response);
+                        
+                        if(response.success) {
+                            swal("Success", response.message, "success");
+                            switch_three = local;
+                            manual = true;
+                            lock = false;
+                        } else {
+                            swal("Error", "There was a problem with switch one.", "error");
+                            (local) ? ($('#switch_three').removeAttr('checked')) : ($('#switch_three').prop('checked', true));
+                            switch_three = $('#switch_three').is(':checked');
+                            manual = true;
+                            lock = false;
+                        }
+                    },
+                    error(status, errorThrown) {
+                        endLoading();
+                        swal("Error", "The request could not be completed.", "error");
+                        (local) ? ($('#switch_three').removeAttr('checked')) : ($('#switch_three').prop('checked', true));
+                        switch_three = $('#switch_three').is(':checked');
+                        manual = true;
+                        lock = false;
+                    }
+                });
+            } else {
+                console.log("a sync event was fired");
+                manual = true;
+                switch_three = $('#switch_three').is(':checked');
+            }
+        }
+    });
+    
+    $('#switch_four').change(function() {
+        console.log("enters into a change event");
+        var local = $('#switch_one').is(':checked');
+        var url = (local) ? (toggleSwitchFourOn) : (toggleSwitchFourOff);
+        
+        console.log("local : " + local);
+        console.log("url : " + url);
+        
+        if(manual) {
+            startLoading();
+        }
+        
+        if(local != switch_four) {
+            console.log("a change has occured");
+            if(manual) {
+                console.log("a manual event was fired");
+                lock = true;
+                //--fire AJAX--
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: null,
+                    success: function(response) {
+                        endLoading();
+                        response = $.parseJSON(response);
+                        
+                        if(response.success) {
+                            swal("Success", response.message, "success");
+                            switch_four = local;
+                            manual = true;
+                            lock = false;
+                        } else {
+                            swal("Error", "There was a problem with switch one.", "error");
+                            (local) ? ($('#switch_four').removeAttr('checked')) : ($('#switch_four').prop('checked', true));
+                            switch_four = $('#switch_four').is(':checked');
+                            manual = true;
+                            lock = false;
+                        }
+                    },
+                    error(status, errorThrown) {
+                        endLoading();
+                        swal("Error", "The request could not be completed.", "error");
+                        (local) ? ($('#switch_four').removeAttr('checked')) : ($('#switch_four').prop('checked', true));
+                        switch_four = $('#switch_four').is(':checked');
+                        manual = true;
+                        lock = false;
+                    }
+                });
+            } else {
+                console.log("a sync event was fired");
+                manual = true;
+                switch_four = $('#switch_four').is(':checked');
+            }
         }
     });
     
@@ -376,27 +295,51 @@ $(function() {
                     }
                     
                     if(response.message.two == 1) {
-                        $('#switch_two').bootstrapToggle('on');
+                        if(!switch_two) {
+                            console.log("sync found a switch must be turned on");
+                            manual = false;
+                            $('#switch_two').bootstrapToggle('on');
+                        }
                     }
                     
                     if(response.message.two == 0) {
-                        $('#switch_two').bootstrapToggle('off');
+                        if(switch_two) {
+                            console.log("sync found a switch must be turned off");
+                            manual = false;
+                            $('#switch_two').bootstrapToggle('off');
+                        }
                     }
                     
-                    if(response.message.three) {
-                        $("#switch_three").prop('checked', true);
+                    if(response.message.three == 1) {
+                        if(!switch_three) {
+                            console.log("sync found a switch must be turned on");
+                            manual = false;
+                            $('#switch_three').bootstrapToggle('on');
+                        }
                     }
                     
-                    if(!response.message.three) {
-                        $("#switch_three").removeAttr('checked');
+                    if(response.message.three == 0) {
+                        if(switch_one) {
+                            console.log("sync found a switch must be turned off");
+                            manual = false;
+                            $('#switch_three').bootstrapToggle('off');
+                        }
                     }
                     
-                    if(response.message.four) {
-                        $("#switch_four").prop('checked', true);
+                    if(response.message.four == 1) {
+                        if(!switch_four) {
+                            console.log("sync found a switch must be turned on");
+                            manual = false;
+                            $('#switch_four').bootstrapToggle('on');
+                        }
                     }
                     
-                    if(!response.message.four) {
-                        $("#switch_four").removeAttr('checked');
+                    if(response.message.four == 0) {
+                        if(switch_four) {
+                            console.log("sync found a switch must be turned off");
+                            manual = false;
+                            $('#switch_four').bootstrapToggle('off');
+                        }
                     }
                 }
                 else {
@@ -406,7 +349,7 @@ $(function() {
             },
             complete:function() {
                 manual = true;
-                setTimeout(synchronize, 10000);
+                setTimeout(synchronize, 5000);
             }
         });
     })();
