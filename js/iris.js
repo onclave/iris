@@ -19,7 +19,7 @@ $(function() {
     var switch_four = $('#switch_four').is(':checked');
     
     var lock = false;
-    var manual = false;
+    var manual = true;
     
     $('#switch_one').bootstrapToggle();
     $('#switch_two').bootstrapToggle();
@@ -29,15 +29,21 @@ $(function() {
     $("#block").hide();
     
     $('#switch_one').change(function() {
+        console.log("enters into a change event");
         var local = $('#switch_one').is(':checked');
         var url = (local) ? (toggleSwitchOneOn) : (toggleSwitchOneOff);
+        
+        console.log("local : " + local);
+        console.log("url : " + url);
         
         if(manual) {
             startLoading();
         }
         
         if(local != switch_one) {
+            console.log("a change has occured");
             if(manual) {
+                console.log("a manual event was fired");
                 //--fire AJAX--
                 $.ajax({
                     type: 'GET',
@@ -53,7 +59,7 @@ $(function() {
                             manual = true;
                         } else {
                             swal("Error", "There was a problem with switch one.", "error");
-                            (local) ? ($('#switch_one').bootstrapToggle('on')) : ($('#switch_one').bootstrapToggle('off'));
+                            (local) ? ($('#switch_one').removeAttr('checked')) : ($('#switch_one').prop('checked', true));
                             switch_one = $('#switch_one').is(':checked');
                             manual = true;
                         }
@@ -61,13 +67,13 @@ $(function() {
                     error(status, errorThrown) {
                         endLoading();
                         swal("Error", "The request could not be completed.", "error");
-                        (local) ? ($('#switch_one').bootstrapToggle('on')) : ($('#switch_one').bootstrapToggle('off'));
+                        (local) ? ($('#switch_one').removeAttr('checked')) : ($('#switch_one').prop('checked', true));
                         switch_one = $('#switch_one').is(':checked');
                         manual = true;
                     }
                 });
             } else {
-                (local) ? ($('#switch_one').bootstrapToggle('on')) : ($('#switch_one').bootstrapToggle('off'));
+                console.log("a sync event was fired");
                 manual = true;
                 switch_one = $('#switch_one').is(':checked');
             }
@@ -339,6 +345,7 @@ $(function() {
     
     (function synchronize() {
         while(lock) {
+            console.log("within while lock");
             setTimeout(synchronize, 1000);
         }
         
@@ -354,6 +361,7 @@ $(function() {
                 if(response.success) {
                     if(response.message.one == 1) {
                         if(!switch_one) {
+                            console.log("sync found a switch must be turned on");
                             manual = false;
                             $('#switch_one').bootstrapToggle('on');
                         }
@@ -361,6 +369,7 @@ $(function() {
                     
                     if(response.message.one == 0) {
                         if(switch_one) {
+                            console.log("sync found a switch must be turned off");
                             manual = false;
                             $('#switch_one').bootstrapToggle('off');
                         }
@@ -397,7 +406,7 @@ $(function() {
             },
             complete:function() {
                 manual = true;
-                setTimeout(synchronize, 1000);
+                setTimeout(synchronize, 10000);
             }
         });
     })();
