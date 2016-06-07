@@ -145,8 +145,10 @@ $(function() {
         }
     });
     
-    $("#switch_three").change(function() {
+    $("#switch_three").click(function() {
         startLoading();
+        
+        alert($(this).prop('checked'));
         
         if($(this).prop('checked')) {
             $.ajax({
