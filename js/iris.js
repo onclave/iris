@@ -15,7 +15,7 @@ $(function() {
     
     $('#switch_one').bootstrapToggle();
     $('#switch_two').bootstrapToggle();
-    //$('#switch_three').bootstrapToggle();
+    $('#switch_three').bootstrapToggle();
     //$('#switch_four').bootstrapToggle();
     
     $("#block").hide();
@@ -145,8 +145,8 @@ $(function() {
         }
     });
     
-    $("#switch_three").click(function() {
-        alert("was clicked");
+    $("#switch_three").change(function() {
+        alert($(this).prop('checked'));
 //        startLoading();
 //        
 //        alert($(this).prop('checked'));
