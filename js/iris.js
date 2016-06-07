@@ -315,7 +315,7 @@ $(function() {
                         }
 
                         if(response.message.three == 0) {
-                            if(switch_one) {
+                            if(switch_three) {
                                 console.log("sync found a switch must be turned off");
                                 manual = false;
                                 $('#switch_three').bootstrapToggle('off');
