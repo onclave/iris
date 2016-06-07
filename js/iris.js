@@ -3,16 +3,18 @@
 // ************/
 
 $(function() {
-    var control = "http://localhost/iris/php/control.php";
-    var toggleSwitchOneOn = control + "?switch_one=ON";
-    var toggleSwitchTwoOn = control + "?switch_two=ON";
-    var toggleSwitchThreeOn = control + "?switch_three=ON";
-    var toggleSwitchFourOn = control + "?switch_four=ON";
-    var toggleSwitchOneOff = control + "?switch_one=OFF";
-    var toggleSwitchTwoOff = control + "?switch_two=OFF";
-    var toggleSwitchThreeOff = control + "?switch_three=OFF";
-    var toggleSwitchFourOff = control + "?switch_four=OFF";
-    var sync = "http://localhost/iris/php/synchronize.php";
+    var subdomain = "";
+    var domain = "localhost";
+    var control = "";
+    var toggleSwitchOneOn = "";
+    var toggleSwitchTwoOn = "";
+    var toggleSwitchThreeOn = "";
+    var toggleSwitchFourOn = "";
+    var toggleSwitchOneOff = "";
+    var toggleSwitchTwoOff = "";
+    var toggleSwitchThreeOff = "";
+    var toggleSwitchFourOff = "";
+    var sync = "";
     
     var lock = false;
     var manual = true;
@@ -33,6 +35,24 @@ $(function() {
     var switch_four = $('#switch_four').is(':checked');
     
     $("#block").hide();
+    
+    (function renderAPIresourceLocators() {
+        control = "http://" + subdomain + domain + "/iris/php/control.php";
+        toggleSwitchOneOn = control + "?switch_one=ON";
+        toggleSwitchTwoOn = control + "?switch_two=ON";
+        toggleSwitchThreeOn = control + "?switch_three=ON";
+        toggleSwitchFourOn = control + "?switch_four=ON";
+        toggleSwitchOneOff = control + "?switch_one=OFF";
+        toggleSwitchTwoOff = control + "?switch_two=OFF";
+        toggleSwitchThreeOff = control + "?switch_three=OFF";
+        toggleSwitchFourOff = control + "?switch_four=OFF";
+        sync = "http://" + subdomain + domain + "/iris/php/synchronize.php";
+    })();
+    
+    function saveSettings() {
+        subdomain = $('#subdomainValue').val();
+        domain = $('#domainValue').val();
+    };
     
     $('#switch_one').change(function() {
         console.log("enters into a change event");
@@ -261,7 +281,15 @@ $(function() {
     });
     
     $("#live_feed").click(function() {
-        $("#sampleModal").modal('show');
+        $("#liveStreamModal").modal('show');
+    });
+    
+    $('#settings').click(function() {
+        $('#settingsModal').modal('show');
+    });
+    
+    $('#saveSettings').click(function() {
+        saveSettings();
     });
     
     (function synchronize() {

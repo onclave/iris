@@ -113,7 +113,7 @@
                                         <tbody class="table-hover">
                                             <tr>
                                                 <td class="text-center" id="live_feed"><span>Live Feed</span></td>
-                                                <td class="text-center">Stop Feed</td>
+                                                <td class="text-center" id="settings">Settings</td>
                                             </tr>
                                         </tbody>
                                     </thread>
@@ -123,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            <div id="sampleModal" class="modal fade" role="dialog">
+            <div id="liveStreamModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -137,6 +137,25 @@
                                         This browser does not support iFrames. Please use a browser that supports iFrames.
                                     </iframe><br/>
                                     <a class="buttonlink" href="http://localhost:8080" target="live_feed" id="live_feed_link">live feed</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="settingsModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Live Stream</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="col-xs-12">
+                                    <input type="text" id="subdomainValue" placeholder="subdomain" value="" />
+                                    <input type="text" id="domainValue" placeholder="domain" value="localhost" />
+                                    <input type="button" id="saveSettings" value="save" />
                                 </div>
                             </div>
                         </div>
