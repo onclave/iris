@@ -60,12 +60,12 @@
                     } else {
                         $response['message'] = $error_sync;
                         
-                        return json_encode($response);
+                        echo json_encode($response);
                     }
                 } catch(PDOException $e) {
                     $response['message'] = $error_db;
                     
-                    return json_encode($response);
+                    echo json_encode($response);
                 }
             } else {
                 //--execution failure--
@@ -93,12 +93,12 @@
                     } else {
                         $response['message'] = $error_sync;
                         
-                        return json_encode($response);
+                        echo json_encode($response);
                     }
                 } catch(PDOException $e) {
                     $response['message'] = $error_db;
                     
-                    return json_encode($response);
+                    echo json_encode($response);
                 }
             } else {
                 //--execution failure--
@@ -130,12 +130,12 @@
                     } else {
                         $response['message'] = $error_sync;
                         
-                        return json_encode($response);
+                        echo json_encode($response);
                     }
                 } catch(PDOException $e) {
                     $response['message'] = $error_db;
                     
-                    return json_encode($response);
+                    echo json_encode($response);
                 }
             } else {
                 //--execution failure--
@@ -163,12 +163,12 @@
                     } else {
                         $response['message'] = $error_sync;
                         
-                        return json_encode($response);
+                        echo json_encode($response);
                     }
                 } catch(PDOException $e) {
                     $response['message'] = $error_db;
                     
-                    return json_encode($response);
+                    echo json_encode($response);
                 }
             } else {
                 //--execution failure--
@@ -200,12 +200,12 @@
                     } else {
                         $response['message'] = $error_sync;
                         
-                        return json_encode($response);
+                        echo json_encode($response);
                     }
                 } catch(PDOException $e) {
                     $response['message'] = $error_db;
                     
-                    return json_encode($response);
+                    echo json_encode($response);
                 }
             } else {
                 //--execution failure--
@@ -233,12 +233,12 @@
                     } else {
                         $response['message'] = $error_sync;
                         
-                        return json_encode($response);
+                        echo json_encode($response);
                     }
                 } catch(PDOException $e) {
                     $response['message'] = $error_db;
                     
-                    return json_encode($response);
+                    echo json_encode($response);
                 }
             } else {
                 //--execution failure--
@@ -270,12 +270,12 @@
                     } else {
                         $response['message'] = $error_sync;
                         
-                        return json_encode($response);
+                        echo json_encode($response);
                     }
                 } catch(PDOException $e) {
                     $response['message'] = $error_db;
                     
-                    return json_encode($response);
+                    echo json_encode($response);
                 }
             } else {
                 //--execution failure--
@@ -303,12 +303,12 @@
                     } else {
                         $response['message'] = $error_sync;
                         
-                        return json_encode($response);
+                        echo json_encode($response);
                     }
                 } catch(PDOException $e) {
                     $response['message'] = $error_db;
                     
-                    return json_encode($response);
+                    echo json_encode($response);
                 }
             } else {
                 //--execution failure--
@@ -318,5 +318,5 @@
         }
     }
 
-    return json_encode($response);
+    echo json_encode($response);
 ?>

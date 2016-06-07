@@ -268,90 +268,99 @@ $(function() {
             setTimeout(synchronize, 1000);
         }
         
-        $.ajax({
-            type: 'GET',
-            url: sync,
-            data: null,
-            success: function(response) {
-                console.log(response);
-                response = $.parseJSON(response);
-                console.log(response);
-                
-                if(response.success) {
-                    if(response.message.one == 1) {
-                        if(!switch_one) {
-                            console.log("sync found a switch must be turned on");
-                            manual = false;
-                            $('#switch_one').bootstrapToggle('on');
+        if(!lock) {
+            $.ajax({
+                type: 'GET',
+                url: sync,
+                data: null,
+                success: function(response) {
+                    console.log(response);
+                    response = $.parseJSON(response);
+                    console.log(response);
+
+                    if(response.success) {
+                        if(response.message.one == 1) {
+                            if(!switch_one) {
+                                console.log("sync found a switch must be turned on");
+                                manual = false;
+                                $('#switch_one').bootstrapToggle('on');
+                            }
+                        }
+
+                        if(response.message.one == 0) {
+                            if(switch_one) {
+                                console.log("sync found a switch must be turned off");
+                                manual = false;
+                                $('#switch_one').bootstrapToggle('off');
+                            }
+                        }
+
+                        if(response.message.two == 1) {
+                            if(!switch_two) {
+                                console.log("sync found a switch must be turned on");
+                                manual = false;
+                                $('#switch_two').bootstrapToggle('on');
+                            }
+                        }
+
+                        if(response.message.two == 0) {
+                            if(switch_two) {
+                                console.log("sync found a switch must be turned off");
+                                manual = false;
+                                $('#switch_two').bootstrapToggle('off');
+                            }
+                        }
+
+                        if(response.message.three == 1) {
+                            if(!switch_three) {
+                                console.log("sync found a switch must be turned on");
+                                manual = false;
+                                $('#switch_three').bootstrapToggle('on');
+                            }
+                        }
+
+                        if(response.message.three == 0) {
+                            if(switch_one) {
+                                console.log("sync found a switch must be turned off");
+                                manual = false;
+                                $('#switch_three').bootstrapToggle('off');
+                            }
+                        }
+
+                        if(response.message.four == 1) {
+                            if(!switch_four) {
+                                console.log("sync found a switch must be turned on");
+                                manual = false;
+                                $('#switch_four').bootstrapToggle('on');
+                            }
+                        }
+
+                        if(response.message.four == 0) {
+                            if(switch_four) {
+                                console.log("sync found a switch must be turned off");
+                                manual = false;
+                                $('#switch_four').bootstrapToggle('off');
+                            }
                         }
                     }
-                    
-                    if(response.message.one == 0) {
-                        if(switch_one) {
-                            console.log("sync found a switch must be turned off");
-                            manual = false;
-                            $('#switch_one').bootstrapToggle('off');
-                        }
+                    else {
+                        manual = true;
+                        swal("Error", response.message, "error");
                     }
-                    
-                    if(response.message.two == 1) {
-                        if(!switch_two) {
-                            console.log("sync found a switch must be turned on");
-                            manual = false;
-                            $('#switch_two').bootstrapToggle('on');
-                        }
-                    }
-                    
-                    if(response.message.two == 0) {
-                        if(switch_two) {
-                            console.log("sync found a switch must be turned off");
-                            manual = false;
-                            $('#switch_two').bootstrapToggle('off');
-                        }
-                    }
-                    
-                    if(response.message.three == 1) {
-                        if(!switch_three) {
-                            console.log("sync found a switch must be turned on");
-                            manual = false;
-                            $('#switch_three').bootstrapToggle('on');
-                        }
-                    }
-                    
-                    if(response.message.three == 0) {
-                        if(switch_one) {
-                            console.log("sync found a switch must be turned off");
-                            manual = false;
-                            $('#switch_three').bootstrapToggle('off');
-                        }
-                    }
-                    
-                    if(response.message.four == 1) {
-                        if(!switch_four) {
-                            console.log("sync found a switch must be turned on");
-                            manual = false;
-                            $('#switch_four').bootstrapToggle('on');
-                        }
-                    }
-                    
-                    if(response.message.four == 0) {
-                        if(switch_four) {
-                            console.log("sync found a switch must be turned off");
-                            manual = false;
-                            $('#switch_four').bootstrapToggle('off');
-                        }
-                    }
-                }
-                else {
+                },
+
+                complete:function() {
                     manual = true;
-                    swal("Error", response.message, "error");
+                    setTimeout(synchronize, 5000);
+                },
+
+                error: function(status, errorThrown) {
+                    swal("Error", "The synchronization could not be completed.", "error");
+                    manual = true;
+                    lock = false;
                 }
-            },
-            complete:function() {
-                manual = true;
-                setTimeout(synchronize, 5000);
-            }
-        });
+            });
+        }
     })();
 })
 
