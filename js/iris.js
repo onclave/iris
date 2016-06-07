@@ -20,7 +20,7 @@ $(function() {
     
     $("#block").hide();
     
-    $("#switch_one").change(function() {
+    $("#switch_one").click(function() {
         startLoading();
         
         if($(this).prop('checked')) {
@@ -83,7 +83,7 @@ $(function() {
         }
     });
     
-    $("#switch_two").change(function() {
+    $("#switch_two").click(function() {
         startLoading();
         
         if($(this).prop('checked')) {
