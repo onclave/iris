@@ -122,7 +122,7 @@ $(function() {
                             manual = true;
                             lock = false;
                         } else {
-                            swal("Error", "There was a problem with switch one.", "error");
+                            swal("Error", "There was a problem with switch two.", "error");
                             (local) ? ($('#switch_two').removeAttr('checked')) : ($('#switch_two').prop('checked', true));
                             switch_two = $('#switch_two').is(':checked');
                             manual = true;

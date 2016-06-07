@@ -17,7 +17,7 @@
     $switch_one_on = "sleep 3";
     $switch_one_off = "sleep 3";
     $switch_two_on = "sleep 3";
-    $switch_two_off = "leep 3";
+    $switch_two_off = "sleep 3";
     $switch_three_on = "sleep 3";
     $switch_three_off = "sleep 3";
     $switch_four_on = "sleep 3";
