@@ -19,9 +19,9 @@
     $switch_two_on = "sleep 3";
     $switch_two_off = "leep 3";
     $switch_three_on = "sleep 3";
-    $switch_three_off = "leep 3";
+    $switch_three_off = "sleep 3";
     $switch_four_on = "sleep 3";
-    $switch_four_off = "leep 3";
+    $switch_four_off = "sleep 3";
 
     $message_bit_01 = "Switch ";
     $message_bit_02 = " was successfully switched ";
