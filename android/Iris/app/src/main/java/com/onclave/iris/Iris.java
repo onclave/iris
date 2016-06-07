@@ -53,6 +53,8 @@ public class Iris extends AppCompatActivity
         }
 
         checkMenuID(menuID);
+
+
     }
 
     public void checkMenuID(int id) {
