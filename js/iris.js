@@ -14,11 +14,6 @@ $(function() {
     var toggleSwitchFourOff = control + "?switch_four=OFF";
     var sync = "http://localhost/iris/php/synchronize.php";
     
-    var switch_one = $('#switch_one').is(':checked');
-    var switch_two = $('#switch_two').is(':checked');
-    var switch_three = $('#switch_three').is(':checked');
-    var switch_four = $('#switch_four').is(':checked');
-    
     var lock = false;
     var manual = true;
     
@@ -31,6 +26,11 @@ $(function() {
     $('#switch_two').bootstrapToggle('off');
     $('#switch_three').bootstrapToggle('off');
     $('#switch_four').bootstrapToggle('off');
+    
+    var switch_one = $('#switch_one').is(':checked');
+    var switch_two = $('#switch_two').is(':checked');
+    var switch_three = $('#switch_three').is(':checked');
+    var switch_four = $('#switch_four').is(':checked');
     
     $("#block").hide();
     
