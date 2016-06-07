@@ -13,75 +13,129 @@ $(function() {
     var toggleSwitchFourOff = "http://localhost/iris/php/switchFourOff.php";
     var sync = "http://localhost/iris/php/synchronize.php";
     
+    var switch_one = $('#switch_one').is(':checked');
+    var switch_two = $('#switch_two').is(':checked');
+    var switch_three = $('#switch_three').is(':checked');
+    var switch_four = $('#switch_four').is(':checked');
+    
+    var lock = false;
+    var manual = false;
+    
     $('#switch_one').bootstrapToggle();
     $('#switch_two').bootstrapToggle();
     $('#switch_three').bootstrapToggle();
-    //$('#switch_four').bootstrapToggle();
+    $('#switch_four').bootstrapToggle();
     
     $("#block").hide();
     
-    $("#switch_one").click(function() {
-        startLoading();
+    $('#switch_one').change(function() {
+        var local = $('#switch_one').is(':checked');
+        var url = (local) ? (toggleSwitchOneOn) : (toggleSwitchOneOff);
         
-        if($(this).prop('checked')) {
-            $.ajax({
-               type: 'GET',
-                url: toggleSwitchOneOn,
-                data: null,
-                success: function(response) {
-                    endLoading();
-                    response = $.parseJSON(response);
-                    
-                    if(response.success) {
-                        swal("Success", response.message, "success");
-                    }
-                    else {
-                        //response was a failure
-                        swal("Error", "There was a problem with switch one.", "error");
-                        $("#switch_one").removeAttr('checked');
-                    }
-                },
-                error: function(status, errorThrown) {
-                    endLoading();
-                    swal("Error", "The request could not be completed.", "error");
-                    $("#switch_one").removeAttr('checked');
-                }
-            });
+        if(manual) {
+            startLoading();
         }
-        else {
-            $.ajax({
-               type: 'GET',
-                url: toggleSwitchOneOff,
-                data: null,
-                success: function(response) {
-                    endLoading();
-                    response = $.parseJSON(response);
-                    
-                    if(response.success) {
+        
+        if(local != switch_one) {
+            if(manual) {
+                //--fire AJAX--
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: null,
+                    success: function(response) {
+                        endLoading();
+                        response = $.parseJSON(response);
                         
                         if(response.success) {
                             swal("Success", response.message, "success");
-                        }
-                        else {
-                            //response was a failure
+                            switch_one = local;
+                            manual = true;
+                        } else {
                             swal("Error", "There was a problem with switch one.", "error");
-                            $("#switch_one").prop('checked', true);
+                            (local) ? ($('#switch_one').bootstrapToggle('on')) : ($('#switch_one').bootstrapToggle('off'));
+                            switch_one = $('#switch_one').is(':checked');
+                            manual = true;
                         }
-                    }
-                    else {
-                        //response was a failure
+                    },
+                    error(status, errorThrown) {
+                        endLoading();
                         swal("Error", "The request could not be completed.", "error");
-                        $("#switch_one").prop('checked', true);
+                        (local) ? ($('#switch_one').bootstrapToggle('on')) : ($('#switch_one').bootstrapToggle('off'));
+                        switch_one = $('#switch_one').is(':checked');
+                        manual = true;
                     }
-                },
-                error: function(status, errorThrown) {
-                    endLoading();
-                    swal("Error", "There was a problem connecting to the server.", "error");
-                    $("#switch_one").prop('checked', true);
-                }
-            });
+                });
+            } else {
+                (local) ? ($('#switch_one').bootstrapToggle('on')) : ($('#switch_one').bootstrapToggle('off'));
+                manual = true;
+                switch_one = $('#switch_one').is(':checked');
+            }
         }
     });
+    
+//    $("#switch_one").click(function() {
+//        startLoading();
+//        
+//        if($(this).prop('checked')) {
+//            $.ajax({
+//               type: 'GET',
+//                url: toggleSwitchOneOn,
+//                data: null,
+//                success: function(response) {
+//                    endLoading();
+//                    response = $.parseJSON(response);
+//                    
+//                    if(response.success) {
+//                        swal("Success", response.message, "success");
+//                    }
+//                    else {
+//                        //response was a failure
+//                        swal("Error", "There was a problem with switch one.", "error");
+//                        $("#switch_one").removeAttr('checked');
+//                    }
+//                },
+//                error: function(status, errorThrown) {
+//                    endLoading();
+//                    swal("Error", "The request could not be completed.", "error");
+//                    $("#switch_one").removeAttr('checked');
+//                }
+//            });
+//        }
+//        else {
+//            $.ajax({
+//               type: 'GET',
+//                url: toggleSwitchOneOff,
+//                data: null,
+//                success: function(response) {
+//                    endLoading();
+//                    response = $.parseJSON(response);
+//                    
+//                    if(response.success) {
+//                        
+//                        if(response.success) {
+//                            swal("Success", response.message, "success");
+//                        }
+//                        else {
+//                            //response was a failure
+//                            swal("Error", "There was a problem with switch one.", "error");
+//                            $("#switch_one").prop('checked', true);
+//                        }
+//                    }
+//                    else {
+//                        //response was a failure
+//                        swal("Error", "The request could not be completed.", "error");
+//                        $("#switch_one").prop('checked', true);
+//                    }
+//                },
+//                error: function(status, errorThrown) {
+//                    endLoading();
+//                    swal("Error", "There was a problem connecting to the server.", "error");
+//                    $("#switch_one").prop('checked', true);
+//                }
+//            });
+//        }
+//    });
     
     $("#switch_two").click(function() {
         startLoading();
@@ -146,7 +200,15 @@ $(function() {
     });
     
     $("#switch_three").change(function() {
-        alert($(this).prop('checked'));
+        if($(this).is(':checked')) {
+            alert("checked");
+            switch_three = $('#switch_three').is(':checked');
+            alert("global : " + switch_three);
+        } else {
+            alert('unchecked');
+            switch_three = $('#switch_three').is(':checked');
+            alert("global : " + switch_three);
+        }
 //        startLoading();
 //        
 //        alert($(this).prop('checked'));
@@ -276,6 +338,10 @@ $(function() {
     });
     
     (function synchronize() {
+        while(lock) {
+            setTimeout(synchronize, 1000);
+        }
+        
         $.ajax({
             type: 'GET',
             url: sync,
@@ -287,13 +353,17 @@ $(function() {
                 
                 if(response.success) {
                     if(response.message.one == 1) {
-//                        $("#switch_one").prop('checked', true);
-                        $('#switch_one').bootstrapToggle('on');
+                        if(!switch_one) {
+                            manual = false;
+                            $('#switch_one').bootstrapToggle('on');
+                        }
                     }
                     
                     if(response.message.one == 0) {
-//                        $("#switch_one").removeAttr('checked');
-                        $('#switch_one').bootstrapToggle('off');
+                        if(switch_one) {
+                            manual = false;
+                            $('#switch_one').bootstrapToggle('off');
+                        }
                     }
                     
                     if(response.message.two == 1) {
@@ -321,10 +391,12 @@ $(function() {
                     }
                 }
                 else {
+                    manual = true;
                     swal("Error", response.message, "error");
                 }
             },
             complete:function() {
+                manual = true;
                 setTimeout(synchronize, 1000);
             }
         });
