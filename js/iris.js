@@ -263,11 +263,6 @@ $(function() {
     });
     
     (function synchronize() {
-        while(lock) {
-            console.log("within while lock");
-            setTimeout(synchronize, 1000);
-        }
-        
         if(!lock) {
             $.ajax({
                 type: 'GET',
@@ -360,6 +355,8 @@ $(function() {
                     lock = false;
                 }
             });
+        } else {
+            setTimeout(synchronize, 1000);
         }
     })();
 })
