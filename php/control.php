@@ -53,8 +53,6 @@
                     $stmt = $db->prepare($SWITCH_ONE_ON);
                     $stmt->execute();
                     
-                    echo $stmt->rowCount();
-                    
                     if($stmt->rowCount() > 0) {
                         (strcmp($response['message'], $error) == 0) ?
                             ($response['message'] = $message_bit_01 . $one . $message_bit_02 . $on) :
