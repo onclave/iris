@@ -146,66 +146,67 @@ $(function() {
     });
     
     $("#switch_three").click(function() {
-        startLoading();
-        
-        alert($(this).prop('checked'));
-        
-        if($(this).prop('checked')) {
-            $.ajax({
-               type: 'GET',
-                url: toggleSwitchThreeOn,
-                data: null,
-                success: function(response) {
-                    endLoading();
-                    response = $.parseJSON(response);
-                    
-                    if(response.success) {
-                        swal("Success", response.message, "success");
-                    }
-                    else {
-                        swal("Error", "There was a problem with switch three.", "error");
-                        $("#switch_three").removeAttr('checked');
-                    }
-                },
-                error: function(status, errorThrown) {
-                    endLoading();
-                    swal("Error", "The request could not be completed.", "error");
-                    $("#switch_three").removeAttr('checked');
-                }
-            });
-        }
-        else {
-            $.ajax({
-               type: 'GET',
-                url: toggleSwitchThreeOff,
-                data: null,
-                success: function(response) {
-                    endLoading();
-                    response = $.parseJSON(response);
-                    
-                    if(response.success) {
-                        if(response.success) {
-                            swal("Success", response.message, "success");
-                        }
-                        else {
-                            //response was a failure
-                            swal("Error", "There was a problem with switch three.", "error");
-                            $("#switch_three").prop('checked', true);
-                        }
-                    }
-                    else {
-                        //response was a failure
-                        swal("Error", "The request could not be completed.", "error");
-                        $("#switch_three").prop('checked', true);
-                    }
-                },
-                error: function(status, errorThrown) {
-                    endLoading();
-                    swal("Error", "There was a problem connecting to the server.", "error");
-                    $("#switch_three").prop('checked', true);
-                }
-            });
-        }
+        alert("was clicked");
+//        startLoading();
+//        
+//        alert($(this).prop('checked'));
+//        
+//        if($(this).prop('checked')) {
+//            $.ajax({
+//               type: 'GET',
+//                url: toggleSwitchThreeOn,
+//                data: null,
+//                success: function(response) {
+//                    endLoading();
+//                    response = $.parseJSON(response);
+//                    
+//                    if(response.success) {
+//                        swal("Success", response.message, "success");
+//                    }
+//                    else {
+//                        swal("Error", "There was a problem with switch three.", "error");
+//                        $("#switch_three").removeAttr('checked');
+//                    }
+//                },
+//                error: function(status, errorThrown) {
+//                    endLoading();
+//                    swal("Error", "The request could not be completed.", "error");
+//                    $("#switch_three").removeAttr('checked');
+//                }
+//            });
+//        }
+//        else {
+//            $.ajax({
+//               type: 'GET',
+//                url: toggleSwitchThreeOff,
+//                data: null,
+//                success: function(response) {
+//                    endLoading();
+//                    response = $.parseJSON(response);
+//                    
+//                    if(response.success) {
+//                        if(response.success) {
+//                            swal("Success", response.message, "success");
+//                        }
+//                        else {
+//                            //response was a failure
+//                            swal("Error", "There was a problem with switch three.", "error");
+//                            $("#switch_three").prop('checked', true);
+//                        }
+//                    }
+//                    else {
+//                        //response was a failure
+//                        swal("Error", "The request could not be completed.", "error");
+//                        $("#switch_three").prop('checked', true);
+//                    }
+//                },
+//                error: function(status, errorThrown) {
+//                    endLoading();
+//                    swal("Error", "There was a problem connecting to the server.", "error");
+//                    $("#switch_three").prop('checked', true);
+//                }
+//            });
+//        }
     });
     
     $("#switch_four").change(function() {
