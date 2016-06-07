@@ -102,6 +102,8 @@ $(function() {
             startLoading();
         }
         
+        console.log("switch_two : " + switch_two);
+        
         if(local != switch_two) {
             console.log("a change has occured");
             if(manual) {
