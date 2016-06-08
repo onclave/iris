@@ -7,9 +7,9 @@
 
     $response = array('success' => false, 'message' => 'The request could not be completed.');
 
-    if(isset($_GET['username']) && isset($_GET['password'])) {
-        $username = $_GET['username'];
-        $password = $_GET['password'];
+    if(isset($_POST['username']) && isset($_POST['password'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
         
         try {
             $stmt = $db->prepare($AUTHENTICATION);
@@ -26,7 +26,7 @@
                 echo json_encode($response);
             }
         } catch(PDOException $e) {
-            $response['message'] = "The database threw an exception! " . $e;
+            $response['message'] = "The database threw an exception!";
             echo json_encode($response);
         }
     } else {

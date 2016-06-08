@@ -15,6 +15,7 @@ $(function() {
     var toggleSwitchThreeOff = "";
     var toggleSwitchFourOff = "";
     var sync = "";
+    var authenticate = "";
     
     var lock = false;
     var manual = true;
@@ -35,6 +36,9 @@ $(function() {
     var switch_four = $('#switch_four').is(':checked');
     
     $("#block").hide();
+    $("#signblock").hide();
+    $("#app-body").hide();
+    $("#loginModal").modal('show');
     
     (function renderAPIresourceLocators() {
         control = "http://" + subdomain + domain + "/iris/php/control.php";
@@ -47,6 +51,7 @@ $(function() {
         toggleSwitchThreeOff = control + "?switch_three=OFF";
         toggleSwitchFourOff = control + "?switch_four=OFF";
         sync = "http://" + subdomain + domain + "/iris/php/synchronize.php";
+        authenticate = "http://" + subdomain + domain + "/iris/php/authentication.php";
     })();
     
     function saveSettings() {
@@ -291,6 +296,39 @@ $(function() {
     $('#saveSettings').click(function() {
         saveSettings();
         swal("Success", "Settings was successfully saved!", "success");
+    });
+    
+    $('#loginForm').submit(function(event) {
+        event.preventDefault();
+        var $form = $(this), username= = $form.find("input[name='username']").val(), password = $form.find("input");
+        $('#loginModal').modal('hide');
+        $("#signblock").show();
+        
+        $.ajax({
+            type: "POST",
+            url: authenticate,
+            data: {
+                username: username,
+                password: password
+            },
+            success: function(response) {
+                $("#signblock").hide();
+                response = $.parseJSON(response);
+                
+                if(response.success) {
+                    swal("Success", response.message, "success");
+                    $('#app-body').show();
+                } else {
+                    swal("Error", response.message, "error");
+                    $('#loginModal').modal('show');
+                }
+            },
+            error: function(status, errorThrown) {
+                $("#signblock").hide();
+                swal("Error", "The request could not be completed.", "error");
+                $('#loginModal').modal('show');
+            }
+        });
     });
     
     (function synchronize() {
