@@ -26,7 +26,7 @@
                 echo json_encode($response);
             }
         } catch(PDOException $e) {
-            $response['message'] = "The database threw an exception!";
+            $response['message'] = "The database threw an exception! " . $e;
             echo json_encode($response);
         }
     } else {
