@@ -10,4 +10,5 @@
     $SWITCH_THREE_OFF = "UPDATE synchronize SET switchthree=false WHERE idsynchronize=1";
     $SWITCH_FOUR_ON = "UPDATE synchronize SET switchfour=true WHERE idsynchronize=1";
     $SWITCH_FOUR_OFF = "UPDATE synchronize SET switchfour=false WHERE idsynchronize=1";
+    $AUTHENTICATION = "SELECT * FROM users WHERE username=? AND password=PASSWORD('?')";
 ?>
