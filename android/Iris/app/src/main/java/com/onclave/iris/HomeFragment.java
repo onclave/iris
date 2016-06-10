@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,18 @@ public class HomeFragment extends Fragment {
     private boolean s3state = false;
     private boolean s4state = false;
 
+    private String domain = "http://10.0.2.2/iris/php";
+
+    private String s1on = domain + "/control.php?switch_one=ON";
+    private String s1off = domain + "/control.php?switch_one=OFF";
+    private String s2on = domain + "/control.php?switch_two=ON";
+    private String s2off = domain + "/control.php?switch_two=OFF";
+    private String s3on = domain + "/control.php?switch_three=ON";
+    private String s3off = domain + "/control.php?switch_three=OFF";
+    private String s4on = domain + "/control.php?switch_four=ON";
+    private String s4off = domain + "/control.php?switch_four=OFF";
+    private String sync = domain + "/synchronize.php";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,9 +51,9 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         final Switch switch1 = (Switch) view.findViewById(R.id.switch1);
-        Switch switch2 = (Switch) view.findViewById(R.id.switch2);
-        Switch switch3 = (Switch) view.findViewById(R.id.switch3);
-        Switch switch4 = (Switch) view.findViewById(R.id.switch4);
+        final Switch switch2 = (Switch) view.findViewById(R.id.switch2);
+        final Switch switch3 = (Switch) view.findViewById(R.id.switch3);
+        final Switch switch4 = (Switch) view.findViewById(R.id.switch4);
 
         switch1.setChecked(false);
         switch2.setChecked(false);
@@ -50,14 +63,11 @@ public class HomeFragment extends Fragment {
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    progressDialog = new ProgressDialog(getActivity());
-                    progressDialog.setMessage("Logging in. Please wait...");
-                    progressDialog.setIndeterminate(false);
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
-                    registerAPIcall("http://httpbin.org/get?site=code&network=tutsplus", switch1);
+                    showProgress();
+                    registerAPIcall(s1on, switch1, R.id.switch1);
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Switch One Off", Toast.LENGTH_SHORT).show();
+                    showProgress();
+                    registerAPIcall(s1off, switch1, R.id.switch1);
                 }
             }
         });
@@ -65,9 +75,11 @@ public class HomeFragment extends Fragment {
         switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Switch Two On", Toast.LENGTH_SHORT).show();
+                    showProgress();
+                    registerAPIcall(s2on, switch2, R.id.switch2);
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Switch Two Off", Toast.LENGTH_SHORT).show();
+                    showProgress();
+                    registerAPIcall(s2off, switch2, R.id.switch2);
                 }
             }
         });
@@ -75,9 +87,11 @@ public class HomeFragment extends Fragment {
         switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Switch Three On", Toast.LENGTH_SHORT).show();
+                    showProgress();
+                    registerAPIcall(s3on, switch3, R.id.switch3);
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Switch Three Off", Toast.LENGTH_SHORT).show();
+                    showProgress();
+                    registerAPIcall(s3off, switch3, R.id.switch3);
                 }
             }
         });
@@ -85,34 +99,55 @@ public class HomeFragment extends Fragment {
         switch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Switch Four On", Toast.LENGTH_SHORT).show();
+                    showProgress();
+                    registerAPIcall(s4on, switch4, R.id.switch4);
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Switch Four Off", Toast.LENGTH_SHORT).show();
+                    showProgress();
+                    registerAPIcall(s4off, switch4, R.id.switch4);
                 }
             }
         });
 
+//        Thread thread = new Thread() {
+//            @Override
+//            public void run() {
+//                try {
+//                    while(getActivity() != null) {
+//                        synchronizeAPI(switch1, switch2, switch3, switch4);
+//                        sleep(1000);
+//                    }
+//                } catch(InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        };
+//
+//        thread.run();
+
         return view;
     }
 
-    public void registerAPIcall(final String url, final Switch switchButton) {
+    public void synchronizeAPI(final Switch s1, final Switch s2, final Switch s3, final Switch s4) {
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET,
-                url,
+                sync,
                 null,
-                new Response.Listener<JSONObject>() {
+                new Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-//                            boolean success = response.getBoolean("success");
-//                            String message = response.getString("message");
-                            response = response.getJSONObject("args");
-                            String site = response.getString("site");
-                            progressDialog.dismiss();
-                            Toast.makeText(getActivity().getApplicationContext(), site, Toast.LENGTH_LONG).show();
-                            switchButton.setChecked(false);
+                            boolean success = response.getBoolean("success");
+                            boolean switchone = response.getBoolean("switchone");
+                            boolean switchtwo = response.getBoolean("switchtwo");
+                            boolean switchthree = response.getBoolean("switchthree");
+                            boolean switchfour = response.getBoolean("switchfour");
+
+                            toggleSwitch(s1, switchone);
+                            toggleSwitch(s2, switchtwo);
+                            toggleSwitch(s3, switchthree);
+                            toggleSwitch(s4, switchfour);
                         } catch (JSONException e) {
-                            //--handle exceptions here--
                             e.printStackTrace();
+                            Snackbar.make(getView(), "Could not parse sync Response", Snackbar.LENGTH_LONG).show();
                         }
                     }
                 },
@@ -120,9 +155,99 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+                        Snackbar.make(getView(), "There was an error creating the sync request.", Snackbar.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    public void registerAPIcall(final String url, final Switch switchButton, final int id) {
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            boolean success = response.getBoolean("success");
+                            String message = response.getString("message");
+
+                            if(progressDialog != null) {
+                                progressDialog.dismiss();
+                            }
+
+                            if(success) {
+                                inverseSwitchValue(switchButton, id);
+                            } else {
+                                toggleSwitch(switchButton, id);
+                            }
+
+                            Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Snackbar.make(getView(), "Could not parse Response", Snackbar.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        Snackbar.make(getView(), "There was an error creating the request.", Snackbar.LENGTH_LONG).show();
                     }
                 });
 
         Volley.newRequestQueue(getActivity().getApplicationContext()).add(jsonRequest);
+    }
+
+    public void inverseSwitchValue(Switch switchButton, final int id) {
+        if(id == R.id.switch1) {
+            s1state = !s1state;
+            toggleSwitch(switchButton, s1state);
+        }
+
+        if(id == R.id.switch2) {
+            s2state = !s2state;
+            toggleSwitch(switchButton, s2state);
+        }
+
+        if(id == R.id.switch3) {
+            s3state = !s3state;
+            toggleSwitch(switchButton, s3state);
+        }
+
+        if(id == R.id.switch4) {
+            s4state = !s4state;
+            toggleSwitch(switchButton, s4state);
+        }
+    }
+
+    public void toggleSwitch(Switch switchButton, int id) {
+        if(id == R.id.switch1) {
+            toggleSwitch(switchButton, s1state);
+        }
+
+        if(id == R.id.switch2) {
+            toggleSwitch(switchButton, s2state);
+        }
+
+        if(id == R.id.switch3) {
+            toggleSwitch(switchButton, s3state);
+        }
+
+        if(id == R.id.switch4) {
+            toggleSwitch(switchButton, s4state);
+        }
+    }
+
+    public void toggleSwitch(Switch switchButton, boolean state) {
+        switchButton.setChecked(state);
+    }
+
+    public void showProgress() {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 }

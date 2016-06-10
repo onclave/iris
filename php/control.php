@@ -58,7 +58,7 @@
                             ($response['message'] = $message_bit_01 . $one . $message_bit_02 . $on) :
                                 ($response['message'] = $response['message'] . " " . $message_bit_01 . $one . $message_bit_02 . $on);
                     } else {
-                        $response['message'] = $error_sync;
+                        $response['message'] = $error_sync . " " . $stmt->rowCount();
                         
                         echo json_encode($response);
                     }

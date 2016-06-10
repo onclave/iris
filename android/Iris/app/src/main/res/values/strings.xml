@@ -7,6 +7,17 @@
     <string name="action_settings">Settings</string>
     <string name="no_internet_connectivity">Your device is not connected to the internet!</string>
     <string name="loading">Please wait, website is loading ...</string>
+    <string name="domain">http://10.0.2.2/iris/php</string>
+    <string name="s1on">/control.php?switch_one=ON</string>
+    <string name="s2on">/control.php?switch_two=ON</string>
+    <string name="s3on">/control.php?switch_three=ON</string>
+    <string name="s4on">/control.php?switch_four=ON</string>
+    <string name="s1off">/control.php?switch_one=OFF</string>
+    <string name="s2off">/control.php?switch_two=OFF</string>
+    <string name="s3off">/control.php?switch_three=OFF</string>
+    <string name="s4off">/control.php?switch_four=OFF</string>
+    <string name="sync">/synchronize.php</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

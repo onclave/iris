@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class Iris extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -176,5 +177,9 @@ public class Iris extends AppCompatActivity
         }
 
         return isConnected;
+    }
+
+    public void syncIris(View view) {
+        Toast.makeText(getBaseContext(), "button", Toast.LENGTH_LONG).show();
     }
 }
